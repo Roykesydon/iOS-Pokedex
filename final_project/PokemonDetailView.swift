@@ -117,14 +117,18 @@ struct PokemonDetailView: View {
                                 .foregroundColor(.red)
                                 .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
                             
-                            HStack{
+                            HStack(spacing: 20){
                                 ForEach(Array(fetcher.items[0].types.enumerated()), id: \.element.slot) { index, item in
-                                    Text(item.type.name)
+                                    Text(item.type.name.capitalized)
+                                        .font(.system(size: 20, weight: .heavy, design: .rounded))
+                                        .foregroundColor(.white)
+                                        .padding(15)
+                                        .background(typeColor[item.type.name])
+                                        .clipShape(Capsule())
                                 }
                             }
-                            
-                            
                         }
+                        .padding(.bottom, 10)
                         
                         HStack{
                             VStack(alignment: .leading){

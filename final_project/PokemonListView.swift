@@ -78,7 +78,7 @@ func changeOffset(next:Bool, offset: Int)->Int{
     let limit = 6
     var result = offset + ((next) ? limit : -limit)
     result = max(0, result)
-    result = min(100, result)
+    result = min((905-1)/limit*limit, result)
     
     return result
 }
