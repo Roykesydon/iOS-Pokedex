@@ -15,12 +15,19 @@ struct PokemonListJSON: Codable{
 }
 
 struct PokemonNameUrl: Codable{
-    let name: String
-    let url: String
+    var name: String = ""
+    var url: String = ""
+}
+
+struct PokemonDetailType: Codable{
+    var slot: Int
+    var type: PokemonNameUrl
 }
 
 struct PokemonDetailJSON: Codable{
-    let id: Int
-    let height: Int
-    let weight: Int
+    var id: Int = 0
+    var height: Int = 0
+    var weight: Int = 0
+    var forms: [PokemonNameUrl] = [PokemonNameUrl()]
+    var types: [PokemonDetailType] = []
 }

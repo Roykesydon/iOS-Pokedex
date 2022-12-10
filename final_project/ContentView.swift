@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var pokemonListFetcher = PokemonListFetcher()
+    @StateObject private var pokemonDetailFetcher = PokemonDetailFetcher()
     
     var body: some View {
         TabView {
@@ -16,25 +17,44 @@ struct ContentView: View {
                 .tabItem {
                     VStack{
                         Image(systemName: "book")
-                        Text("圖鑑")
+                        Text("Pokédex")
                     }
                 }
                 .environmentObject(pokemonListFetcher)
-            Color.blue
+                .environmentObject(pokemonDetailFetcher)
+            VStack{}
                 .tabItem {
                     VStack{
-                        Image(systemName: "house")
-                        Text("yellow")
+                        Image(systemName: "heart")
+                        Text("我的最愛")
                     }
+                    .frame(height: 150)
                 }
+            //            Color.blue
+            //                .tabItem {
+            //                    VStack{
+            //                        Image(systemName: "house")
+            //                        Text("yellow")
+            //                    }
+            //                }
+            //            PokemonDetailView(pokemonId: 0)
+            //                .tabItem {
+            //                    VStack{
+            //                        Image(systemName: "book")
+            //                        Text("圖鑑")
+            //                    }
+            //                }
+            //                .environmentObject(pokemonDetailFetcher)
         }
-        .padding()
+        .onAppear{
+//            UITabBar.appearance().backgroundColor = UIColor(Color(red: 220/255, green: 220/255, blue: 220/255))
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(PokemonListFetcher())
+        
     }
 }
