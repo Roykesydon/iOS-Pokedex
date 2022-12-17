@@ -111,11 +111,13 @@ struct PokemonDetailView: View {
                         .padding(.top, 30)
                         
                         VStack(alignment: .center){
-                            Text(fetcher.items[0].forms[0].name.capitalized)
-                                .frame(maxWidth: .infinity)
-                                .font(.system(size: 35, weight: .heavy, design: .rounded))
-                                .foregroundColor(.red)
-                                .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
+                            HStack(spacing: 0){
+                                Text(fetcher.items[0].forms[0].name.capitalized)
+                                    .frame(maxWidth: .infinity)
+                                    .font(.system(size: 35, weight: .heavy, design: .rounded))
+                                    .foregroundColor(.red)
+                                    .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
+                            }
                             
                             HStack(spacing: 20){
                                 ForEach(Array(fetcher.items[0].types.enumerated()), id: \.element.slot) { index, item in
@@ -158,6 +160,15 @@ struct PokemonDetailView: View {
                         .background(.white)
                         .font(.system(size: 30, weight: .light, design: .rounded))
                         
+                        
+                        VStack{
+                            ShareLink(item: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(fetcher.items[0].id).png")!){
+                                Image(systemName: "square.and.arrow.up")
+                                
+                                Text("Image Link")
+                                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                            }
+                        }.padding(.top, 10)
                     }
                 }
                 .alert(fetcher.error?.localizedDescription ?? "", isPresented: $fetcher.showError, actions: {

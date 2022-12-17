@@ -7,9 +7,31 @@
 
 import SwiftUI
 
+extension Array: RawRepresentable where Element: Codable {
+    public init?(rawValue: String) {
+        guard let data = rawValue.data(using: .utf8),
+              let result = try? JSONDecoder().decode([Element].self, from: data)
+        else {
+            return nil
+        }
+        self = result
+    }
+
+    public var rawValue: String {
+        guard let data = try? JSONEncoder().encode(self),
+              let result = String(data: data, encoding: .utf8)
+        else {
+            return "[]"
+        }
+        return result
+    }
+}
+
 struct ContentView: View {
     @StateObject private var pokemonListFetcher = PokemonListFetcher()
     @StateObject private var pokemonDetailFetcher = PokemonDetailFetcher()
+    
+    @AppStorage("favorites") var favorites = Array(repeating: false, count: 905 + 1)
     
     var body: some View {
         TabView {
@@ -26,7 +48,7 @@ struct ContentView: View {
                 .tabItem {
                     VStack{
                         Image(systemName: "heart")
-                        Text("我的最愛")
+                        Text("Favorites")
                     }
                     .frame(height: 150)
                 }

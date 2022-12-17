@@ -15,6 +15,7 @@
 		7036608E293C6CCF00D46160 /* PokemonJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036608D293C6CCF00D46160 /* PokemonJSON.swift */; };
 		70366092293CB85C00D46160 /* PokemonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70366091293CB85C00D46160 /* PokemonDetailView.swift */; };
 		703660942944AA7500D46160 /* PokemonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703660932944AA7500D46160 /* PokemonType.swift */; };
+		70366096294E08B800D46160 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70366095294E08B800D46160 /* FavoritesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		7036608D293C6CCF00D46160 /* PokemonJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonJSON.swift; sourceTree = "<group>"; };
 		70366091293CB85C00D46160 /* PokemonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailView.swift; sourceTree = "<group>"; };
 		703660932944AA7500D46160 /* PokemonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonType.swift; sourceTree = "<group>"; };
+		70366095294E08B800D46160 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				7036607F293C576C00D46160 /* ContentView.swift */,
 				703660932944AA7500D46160 /* PokemonType.swift */,
 				7036608B293C684600D46160 /* PokemonListView.swift */,
+				70366095294E08B800D46160 /* FavoritesView.swift */,
 				70366091293CB85C00D46160 /* PokemonDetailView.swift */,
 				7036608D293C6CCF00D46160 /* PokemonJSON.swift */,
 				70366081293C576D00D46160 /* Assets.xcassets */,
@@ -153,6 +156,7 @@
 				7036608C293C684600D46160 /* PokemonListView.swift in Sources */,
 				7036607E293C576C00D46160 /* final_projectApp.swift in Sources */,
 				703660942944AA7500D46160 /* PokemonType.swift in Sources */,
+				70366096294E08B800D46160 /* FavoritesView.swift in Sources */,
 				7036608E293C6CCF00D46160 /* PokemonJSON.swift in Sources */,
 				70366092293CB85C00D46160 /* PokemonDetailView.swift in Sources */,
 			);

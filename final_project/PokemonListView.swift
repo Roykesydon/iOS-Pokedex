@@ -38,7 +38,8 @@ class PokemonListFetcher: ObservableObject {
     }
     
     func fetchData(offset: Int) {
-        let urlString = "https://pokeapi.co/api/v2/pokemon/?offset=\(offset)&limit=6"
+        let limit = 4
+        let urlString = "https://pokeapi.co/api/v2/pokemon/?offset=\(offset)&limit=\(limit)"
         
         guard let urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let url = URL(string: urlString) else {
@@ -75,7 +76,7 @@ class PokemonListFetcher: ObservableObject {
 }
 
 func changeOffset(next:Bool, offset: Int)->Int{
-    let limit = 6
+    let limit = 4
     var result = offset + ((next) ? limit : -limit)
     result = max(0, result)
     result = min((905-1)/limit*limit, result)
@@ -87,9 +88,11 @@ struct PokemonListView: View {
     @EnvironmentObject var fetcher: PokemonListFetcher
     @EnvironmentObject var detailFetcher: PokemonDetailFetcher
     @State var offset = 0
+    @State var searchText = ""
+    @Binding var favorites: [Bool]
     
     var body: some View {
-        let columns = Array(repeating: GridItem(), count: 2)
+        //        let columns = Array(repeating: GridItem(), count: 2)
         ZStack {
             NavigationView {
                 VStack(spacing: 0){
@@ -101,7 +104,7 @@ struct PokemonListView: View {
                         .background(.red)
                     
                     VStack(spacing: 0){
-                        LazyVGrid(columns: columns) {
+                        List {
                             ForEach(Array(fetcher.items.enumerated()), id: \.element.name) {
                                 index, item in
                                 
@@ -111,52 +114,70 @@ struct PokemonListView: View {
                                             .environmentObject(detailFetcher)
                                     }label:{
                                         HStack{
-                                            VStack{
-                                                ZStack{
-                                                    Rectangle()
-                                                        .foregroundColor(.black)
-                                                        .frame(width: 113, height: 30)
-                                                    
-                                                    PieSegment(start: .degrees(180), end: .degrees(360))
-                                                        .foregroundColor(.red)
-                                                        .frame(width: 120)
-                                                        .offset(y:-2)
-                                                    PieSegment(start: .degrees(0), end: .degrees(180))
-                                                        .foregroundColor(.white)
-                                                        .frame(width: 120)
-                                                        .offset(y:2)
-                                                    
-                                                    Circle()
-                                                        .frame(width: 30)
-                                                        .foregroundColor(.black)
-                                                    Circle()
-                                                        .frame(width: 23)
-                                                        .foregroundColor(.white)
-                                                    
-                                                    AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(offset+index+1).png")) { phase in
-                                                        if let image = phase.image {
-                                                            image
-                                                                .resizable()
-                                                        } else if phase.error != nil {
-//                                                            Image(systemName: "questionmark.circle.fill")
-//                                                                .resizable()
-                                                        } else {
-//                                                            Color.gray
-                                                        }
+                                            ZStack{
+                                                Rectangle()
+                                                    .foregroundColor(.black)
+                                                    .frame(width: 95, height: 30)
+                                                
+                                                PieSegment(start: .degrees(180), end: .degrees(360))
+                                                    .foregroundColor(.red)
+                                                    .frame(width: 100)
+                                                    .offset(y:-2)
+                                                PieSegment(start: .degrees(0), end: .degrees(180))
+                                                    .foregroundColor(.white)
+                                                    .frame(width: 100)
+                                                    .offset(y:2)
+                                                
+                                                Circle()
+                                                    .frame(width: 30)
+                                                    .foregroundColor(.black)
+                                                Circle()
+                                                    .frame(width: 23)
+                                                    .foregroundColor(.white)
+                                                
+                                                AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(offset+index+1).png")) { phase in
+                                                    if let image = phase.image {
+                                                        image
+                                                            .resizable()
+                                                    } else if phase.error != nil {
+                                                        //                                                            Image(systemName: "questionmark.circle.fill")
+                                                        //                                                                .resizable()
+                                                    } else {
+                                                        //                                                            Color.gray
                                                     }
-                                                    .scaledToFill()
-                                                    .frame(width: 110, height: 110)
-                                                    .clipShape(Circle())
                                                 }
-                                                Text(item.name.capitalized)
-                                                    .font(.system(size: 18, weight: .heavy, design: .rounded))
-                                                    .padding(.top, 10)
+                                                .scaledToFill()
+                                                .frame(width: 80, height: 80)
+                                                .clipShape(Circle())
                                             }
+                                            HStack(alignment: .center){
+                                                Text(item.name.capitalized)
+                                                    .font(.system(size: 20, weight: .heavy, design: .rounded))
+                                                    .foregroundColor(.red)
+                                                Spacer()
+                                                
+                                                if favorites[offset+index+1] == false{
+                                                    Image(systemName: "heart")
+                                                        .foregroundColor(.red)
+                                                        .onTapGesture {
+                                                            favorites[offset+index+1] = !favorites[offset+index+1]
+                                                        }
+                                                }
+                                                else if favorites[offset+index+1] == true{
+                                                    Image(systemName: "heart.fill")
+                                                        .foregroundColor(.red)
+                                                        .onTapGesture {
+                                                            favorites[offset+index+1] = !favorites[offset+index+1]
+                                                        }
+                                                }
+                                            }
+                                            
                                         }
-                                        .padding(10)
                                     }
-                                }
+                                }.listRowBackground(Color(red: 235/255, green: 235/255, blue: 235/255))
                             }
+                            .listRowSeparator(.hidden)
+                            .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                         }
                         .alert(fetcher.error?.localizedDescription ?? "", isPresented: $fetcher.showError, actions: {
                         })
@@ -165,16 +186,24 @@ struct PokemonListView: View {
                                 fetcher.fetchData(offset: offset)
                             }
                         }
+                        .scrollContentBackground(.hidden)
+                        .listRowBackground(Color.red)
+                        .frame(height: 550)
                         
                         
-                        
-                        HStack(spacing: 20){
+                        HStack(spacing: 50){
                             Button {
                                 offset = changeOffset(next: false, offset: offset)
                                 fetcher.fetchData(offset: offset)
                             } label: {
                                 Image(systemName: "chevron.left")
                             }
+                            //                            .overlay {
+                            //                                Circle()
+                            //                                    .strokeBorder(.red, lineWidth: 2)
+                            //                                    .frame(width: 30, height: 30)
+                            //                            }
+                            
                             Button {
                                 offset = changeOffset(next: true, offset: offset)
                                 fetcher.fetchData(offset: offset)
@@ -185,7 +214,7 @@ struct PokemonListView: View {
                         }
                     }
                     .frame(maxHeight: .infinity)
-                    .background(Color(red: 230/255, green: 230/255, blue: 230/255))
+                    .background(Color(red: 255/255, green: 255/255, blue: 255/255))
                     
                     Spacer()
                 }
@@ -193,6 +222,7 @@ struct PokemonListView: View {
             }
             .navigationTitle("寶可夢列表")
             .navigationBarHidden(true)
+            //            .searchable(text: $searchText, placement: SearchFieldPlacement.navigationBarDrawer)
             
             if fetcher.isLoading{
                 ProgressView()
@@ -200,10 +230,17 @@ struct PokemonListView: View {
                     .background(Color(red: 0, green: 0, blue: 0, opacity: 0.3))
             }
         }
+        .onAppear{
+            UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = .white
+            UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .black
+            
+        }
     }
 }
 
 struct PokemonListView_Previews: PreviewProvider {
+    @State var favorites = Array(repeating: false, count: 905 + 1)
+    
     static var previews: some View {
         PokemonListView()
             .environmentObject(PokemonListFetcher())
