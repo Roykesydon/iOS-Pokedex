@@ -87,9 +87,12 @@ func changeOffset(next:Bool, offset: Int)->Int{
 struct PokemonListView: View {
     @EnvironmentObject var fetcher: PokemonListFetcher
     @EnvironmentObject var detailFetcher: PokemonDetailFetcher
+    
     @State var offset = 0
     @State var searchText = ""
+    
     @Binding var favorites: [Bool]
+    @Binding var pokemonNames: [String]
     
     var body: some View {
         //        let columns = Array(repeating: GridItem(), count: 2)
@@ -161,6 +164,7 @@ struct PokemonListView: View {
                                                         .foregroundColor(.red)
                                                         .onTapGesture {
                                                             favorites[offset+index+1] = !favorites[offset+index+1]
+                                                            pokemonNames[offset+index+1] = item.name
                                                         }
                                                 }
                                                 else if favorites[offset+index+1] == true{
@@ -239,10 +243,11 @@ struct PokemonListView: View {
 }
 
 struct PokemonListView_Previews: PreviewProvider {
-    @State var favorites = Array(repeating: false, count: 905 + 1)
+    @State static var favorites = Array(repeating: false, count: 905 + 1)
+    @State static var pokemonNames = Array(repeating: "", count: 905 + 1)
     
     static var previews: some View {
-        PokemonListView()
+        PokemonListView(favorites: $favorites, pokemonNames: $pokemonNames)
             .environmentObject(PokemonListFetcher())
             .environmentObject(PokemonDetailFetcher())
     }
