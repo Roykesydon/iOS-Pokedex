@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Liquid
 
 func getBoolArrayTrueIndex(arr: [Bool]) -> [Int]{
     
@@ -36,100 +37,100 @@ struct FavoritesView: View {
     @Binding var favorites: [Bool]
     @Binding var pokemonNames: [String]
     
+    
     var body: some View {
         //        let columns = Array(repeating: GridItem(), count: 2)
         ZStack {
             NavigationView {
                 VStack(spacing: 0){
-                    List {
-                        ForEach(Array(filterItems.enumerated()), id: \.element.index) {
-                            index, item in
-                            
-                            ZStack{
-                                NavigationLink {
-                                    PokemonDetailView(pokemonId: item.index)
-                                        .environmentObject(detailFetcher)
-                                }label:{
-                                    HStack{
-                                        ZStack{
-                                            Rectangle()
-                                                .foregroundColor(.black)
-                                                .frame(width: 95, height: 30)
-                                            
-                                            PieSegment(start: .degrees(180), end: .degrees(360))
-                                                .foregroundColor(.red)
-                                                .frame(width: 100)
-                                                .offset(y:-2)
-                                            PieSegment(start: .degrees(0), end: .degrees(180))
-                                                .foregroundColor(.white)
-                                                .frame(width: 100)
-                                                .offset(y:2)
-                                            
-                                            Circle()
-                                                .frame(width: 30)
-                                                .foregroundColor(.black)
-                                            Circle()
-                                                .frame(width: 23)
-                                                .foregroundColor(.white)
-                                            
-                                            AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(item.index).png")) { phase in
-                                                if let image = phase.image {
-                                                    image
-                                                        .resizable()
+                    ZStack {
+                        List {
+                            ForEach(Array(filterItems.enumerated()), id: \.element.index) {
+                                index, item in
+                                
+                                ZStack{
+                                    NavigationLink {
+                                        PokemonDetailView(pokemonId: item.index)
+                                            .environmentObject(detailFetcher)
+                                    }label:{
+                                        HStack{
+                                            ZStack{
+                                                Rectangle()
+                                                    .foregroundColor(.black)
+                                                    .frame(width: 95, height: 30)
+                                                
+                                                PieSegment(start: .degrees(180), end: .degrees(360))
+                                                    .foregroundColor(.red)
+                                                    .frame(width: 100)
+                                                    .offset(y:-2)
+                                                PieSegment(start: .degrees(0), end: .degrees(180))
+                                                    .foregroundColor(.white)
+                                                    .frame(width: 100)
+                                                    .offset(y:2)
+                                                
+                                                Circle()
+                                                    .frame(width: 30)
+                                                    .foregroundColor(.black)
+                                                Circle()
+                                                    .frame(width: 23)
+                                                    .foregroundColor(.white)
+                                                
+                                                AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(item.index).png")) { phase in
+                                                    if let image = phase.image {
+                                                        image
+                                                            .resizable()
+                                                    }
+                                                }
+                                                .scaledToFill()
+                                                .frame(width: 80, height: 80)
+                                                .clipShape(Circle())
+                                            }
+                                            HStack(alignment: .center){
+                                                Text(item.name.capitalized)
+                                                    .font(.system(size: 20, weight: .heavy, design: .rounded))
+                                                    .foregroundColor(.red)
+                                                Spacer()
+                                                
+                                                if favorites[item.index] == false{
+                                                    Image(systemName: "heart")
+                                                        .foregroundColor(.red)
+                                                        .onTapGesture {
+                                                            favorites[item.index] = !favorites[item.index]
+                                                        }
+                                                }
+                                                else if favorites[item.index] == true{
+                                                    Image(systemName: "heart.fill")
+                                                        .foregroundColor(.red)
+                                                        .onTapGesture {
+                                                            favorites[item.index] = !favorites[item.index]
+                                                        }
                                                 }
                                             }
-                                            .scaledToFill()
-                                            .frame(width: 80, height: 80)
-                                            .clipShape(Circle())
-                                        }
-                                        HStack(alignment: .center){
-                                            Text(item.name.capitalized)
-                                                .font(.system(size: 20, weight: .heavy, design: .rounded))
-                                                .foregroundColor(.red)
-                                            Spacer()
                                             
-                                            if favorites[item.index] == false{
-                                                Image(systemName: "heart")
-                                                    .foregroundColor(.red)
-                                                    .onTapGesture {
-                                                        favorites[item.index] = !favorites[item.index]
-                                                    }
-                                            }
-                                            else if favorites[item.index] == true{
-                                                Image(systemName: "heart.fill")
-                                                    .foregroundColor(.red)
-                                                    .onTapGesture {
-                                                        favorites[item.index] = !favorites[item.index]
-                                                    }
-                                            }
                                         }
-                                        
                                     }
-                                }
-                            }.listRowBackground(Color(red: 235/255, green: 235/255, blue: 235/255))
+                                }.listRowBackground(Color(red: 235/255, green: 235/255, blue: 235/255, opacity:1.0))
+                            }
+                            .listRowSeparator(.hidden)
+                            .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                         }
-                        .listRowSeparator(.hidden)
-                        .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
-                    }
-                    //                    .alert(fetcher.error?.localizedDescription ?? "", isPresented: $fetcher.showError, actions: {
-                    //                    })
-                    .onAppear {
-                        //                        if fetcher.items.isEmpty {
-                        //                            fetcher.fetchData(offset: offset)
-                        //                        }
-                    }
-                    .scrollContentBackground(.hidden)
-                    .listRowBackground(Color.red)
-                    //                    .frame(height: 550)
-                    .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
-                    .onChange(of: searchText) { searchText in
-
-                        if !searchText.isEmpty {
-                            filterItems = items.filter { $0.name.lowercased().contains(searchText.lowercased()) }
-                        } else {
-                            filterItems = items
+                        .onAppear {
                         }
+                        .scrollContentBackground(.hidden)
+                        .listRowBackground(Color.red)
+                        //                    .frame(height: 550)
+                        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+                        .onChange(of: searchText) { searchText in
+                            
+                            if !searchText.isEmpty {
+                                filterItems = items.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+                            } else {
+                                filterItems = items
+                            }
+                            
                     }
+                    }
+                    
                 }
                 .frame(maxHeight: .infinity)
                 .background(Color(red: 255/255, green: 255/255, blue: 255/255))
@@ -163,6 +164,7 @@ struct FavoritesView: View {
         }
     }
 }
+
 
 struct FavoritesView_Previews: PreviewProvider {
     @State static var favorites = Array(repeating: false, count: 905 + 1)

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Liquid
 
 class PokemonDetailFetcher: ObservableObject {
     @Published var items = [PokemonDetailJSON()]
@@ -74,6 +75,36 @@ struct PokemonDetailView: View {
                 ScrollView{
                     VStack{
                         ZStack {
+                            ZStack {
+                                ForEach(Array(fetcher.items[0].types.reversed() .enumerated()), id: \.element.slot) { index, item in
+                                    if fetcher.items[0].types.count == 1{
+                                        Liquid()
+                                            .frame(width: 350, height: 350)
+                                            .foregroundColor(typeColor[item.type.name])
+                                            .opacity(0.3)
+                                        
+                                        Liquid()
+                                            .frame(width: 320, height: 320)
+                                            .foregroundColor(typeColor[item.type.name])
+                                            .opacity(0.9)
+                                    }
+                                    else if fetcher.items[0].types.count > 1{
+                                        let colorBack = index==0 ? typeColor[item.type.name] : Color(red: 0, green: 0, blue: 0, opacity: 0)
+                                        Liquid()
+                                            .frame(width: 350, height: 350)
+                                            .foregroundColor(colorBack)
+                                            .opacity(0.3)
+                                        
+                                        let colorFront = index==1 ? typeColor[item.type.name] : Color(red: 0, green: 0, blue: 0, opacity: 0)
+                                        
+                                        Liquid()
+                                            .frame(width: 320, height: 320)
+                                            .foregroundColor(colorFront)
+                                            .opacity(0.9)
+                                    }
+                                }
+                            }
+                            
                             Rectangle()
                                 .foregroundColor(.black)
                                 .frame(width: 265, height: 30)

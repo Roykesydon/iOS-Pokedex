@@ -33,9 +33,19 @@ struct ContentView: View {
     
     @AppStorage("favorites") var favorites = Array(repeating: false, count: 905 + 1)
     @AppStorage("pokemonNames") var pokemonNames = Array(repeating: "", count: 905 + 1)
+
     
     var body: some View {
         TabView {
+            PokemonListView(favorites: $favorites, pokemonNames: $pokemonNames)
+                .tabItem {
+                    VStack{
+                        Image(systemName: "book")
+                        Text("Pokédex")
+                    }
+                }
+                .environmentObject(pokemonListFetcher)
+                .environmentObject(pokemonDetailFetcher)
             
             FavoritesView(favorites: $favorites, pokemonNames: $pokemonNames)
                 .tabItem {
@@ -47,15 +57,7 @@ struct ContentView: View {
                 }
                 .environmentObject(pokemonListFetcher)
                 .environmentObject(pokemonDetailFetcher)
-            PokemonListView(favorites: $favorites, pokemonNames: $pokemonNames)
-                .tabItem {
-                    VStack{
-                        Image(systemName: "book")
-                        Text("Pokédex")
-                    }
-                }
-                .environmentObject(pokemonListFetcher)
-                .environmentObject(pokemonDetailFetcher)
+            
             //            Color.blue
             //                .tabItem {
             //                    VStack{

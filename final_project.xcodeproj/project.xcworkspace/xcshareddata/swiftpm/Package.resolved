@@ -1,0 +1,68 @@
+{
+  "pins" : [
+    {
+      "identity" : "animatetext",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jasudev/AnimateText",
+      "state" : {
+        "revision" : "c55847e03bb3f36cf83cc217fe60ec5feda9ddd6",
+        "version" : "0.5.0"
+      }
+    },
+    {
+      "identity" : "easymenu",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hdehghan/EasyMenu",
+      "state" : {
+        "branch" : "main",
+        "revision" : "cb1b937c79cf58b5b9e0bcb0dd092d2663a918f4"
+      }
+    },
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher",
+      "state" : {
+        "branch" : "master",
+        "revision" : "3e091ee962391a2ddcae5b18e17bc625f9d88d6e"
+      }
+    },
+    {
+      "identity" : "liquid",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/maustinstar/liquid",
+      "state" : {
+        "branch" : "master",
+        "revision" : "067aecd19425b3d37d1bca176aca9a0dc5ff6ed0"
+      }
+    },
+    {
+      "identity" : "nuke",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kean/Nuke",
+      "state" : {
+        "branch" : "master",
+        "revision" : "3d11393974c2422a25a8b98c7a64eaff004eeaa2"
+      }
+    },
+    {
+      "identity" : "shiny",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/maustinstar/shiny",
+      "state" : {
+        "branch" : "master",
+        "revision" : "862360b8ab6b9ea9eb1156569a30f154b22625a5"
+      }
+    },
+    {
+      "identity" : "swipycell",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/moritzsternemann/SwipyCell",
+      "state" : {
+        "revision" : "a63835ea7d507ca0f0564cd2530e60e89bc775ae",
+        "version" : "4.1.0"
+      }
+    }
+  ],
+  "version" : 2
+}
