@@ -28,6 +28,8 @@
 		703660BD2956D80700D46160 /* EasyMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 703660BC2956D80700D46160 /* EasyMenu */; };
 		703660C02956D8A100D46160 /* Shiny in Frameworks */ = {isa = PBXBuildFile; productRef = 703660BF2956D8A100D46160 /* Shiny */; };
 		703660C32956D97300D46160 /* Liquid in Frameworks */ = {isa = PBXBuildFile; productRef = 703660C22956D97300D46160 /* Liquid */; };
+		703660C529581B2000D46160 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703660C429581B2000D46160 /* LoginView.swift */; };
+		703660C729585EED00D46160 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703660C629585EED00D46160 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		703660A62951F6C200D46160 /* PokedexWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = PokedexWidget.intentdefinition; sourceTree = "<group>"; };
 		703660A72951F6C400D46160 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		703660A92951F6C400D46160 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		703660C429581B2000D46160 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		703660C629585EED00D46160 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,8 @@
 				7036607F293C576C00D46160 /* ContentView.swift */,
 				703660932944AA7500D46160 /* PokemonType.swift */,
 				7036608B293C684600D46160 /* PokemonListView.swift */,
+				703660C429581B2000D46160 /* LoginView.swift */,
+				703660C629585EED00D46160 /* Config.swift */,
 				703660972951BDFF00D46160 /* FavoritesView.swift */,
 				70366091293CB85C00D46160 /* PokemonDetailView.swift */,
 				7036608D293C6CCF00D46160 /* PokemonJSON.swift */,
@@ -282,9 +288,11 @@
 				70366080293C576C00D46160 /* ContentView.swift in Sources */,
 				7036608C293C684600D46160 /* PokemonListView.swift in Sources */,
 				7036607E293C576C00D46160 /* final_projectApp.swift in Sources */,
+				703660C529581B2000D46160 /* LoginView.swift in Sources */,
 				703660AB2951F6C400D46160 /* PokedexWidget.intentdefinition in Sources */,
 				703660942944AA7500D46160 /* PokemonType.swift in Sources */,
 				703660982951BDFF00D46160 /* FavoritesView.swift in Sources */,
+				703660C729585EED00D46160 /* Config.swift in Sources */,
 				7036608E293C6CCF00D46160 /* PokemonJSON.swift in Sources */,
 				70366092293CB85C00D46160 /* PokemonDetailView.swift in Sources */,
 			);
@@ -433,6 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"final_project/Preview Content\"";
+				DEVELOPMENT_TEAM = AV5D64SZLK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -462,6 +471,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"final_project/Preview Content\"";
+				DEVELOPMENT_TEAM = AV5D64SZLK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -489,6 +499,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AV5D64SZLK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PokedexWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PokedexWidget;
@@ -515,6 +526,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AV5D64SZLK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PokedexWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PokedexWidget;
