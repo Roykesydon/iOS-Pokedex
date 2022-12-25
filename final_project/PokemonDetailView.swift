@@ -199,7 +199,9 @@ struct PokemonDetailView: View {
                                 Text("Image Link")
                                     .font(.system(size: 20, weight: .bold, design: .rounded))
                             }
-                        }.padding(.top, 10)
+                        }
+                        .padding(.top, 10)
+                        .padding(.bottom, 10)
                     }
                 }
                 .alert(fetcher.error?.localizedDescription ?? "", isPresented: $fetcher.showError, actions: {

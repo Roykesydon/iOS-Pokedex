@@ -139,6 +139,17 @@ struct FavoritesView: View {
             }
             .navigationTitle("寶可夢列表")
             .navigationBarHidden(true)
+            .refreshable {
+                let favoriteIndex = getBoolArrayTrueIndex(arr: self.favorites)
+                var newItems:[IndexAndName] = []
+                
+                for element in favoriteIndex {
+                    newItems.append(IndexAndName(index: element, name: self.pokemonNames[element]))
+                }
+                
+                self.items = newItems
+                self.filterItems = items
+            }
             //            .searchable(text: $searchText, placement: SearchFieldPlacement.navigationBarDrawer)
             
             if fetcher.isLoading{
@@ -152,15 +163,15 @@ struct FavoritesView: View {
             UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .black
             
             
-            let favoriteIndex = getBoolArrayTrueIndex(arr: favorites)
+            let favoriteIndex = getBoolArrayTrueIndex(arr: self.favorites)
             var newItems:[IndexAndName] = []
             
             for element in favoriteIndex {
-                newItems.append(IndexAndName(index: element, name: pokemonNames[element]))
+                newItems.append(IndexAndName(index: element, name: self.pokemonNames[element]))
             }
             
-            items = newItems
-            filterItems = items
+            self.items = newItems
+            self.filterItems = items
         }
     }
 }

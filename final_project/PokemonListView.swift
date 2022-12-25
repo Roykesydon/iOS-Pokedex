@@ -216,6 +216,7 @@ struct PokemonListView: View {
                             }
                             
                         }
+                        .padding(.top, 10)
                     }
                     .frame(maxHeight: .infinity)
                     .background(Color(red: 255/255, green: 255/255, blue: 255/255))

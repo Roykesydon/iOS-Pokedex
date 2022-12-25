@@ -1,0 +1,10 @@
+//
+//  Config.swift
+//  final_project
+//
+//  Created by roykesydone on 2022/12/25.
+//
+
+import Foundation
+
+let apiToken = ""
