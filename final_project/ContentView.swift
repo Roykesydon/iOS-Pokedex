@@ -31,8 +31,8 @@ struct ContentView: View {
     @StateObject private var pokemonListFetcher = PokemonListFetcher()
     @StateObject private var pokemonDetailFetcher = PokemonDetailFetcher()
     
-    @AppStorage("favorites") var favorites = Array(repeating: false, count: 905 + 1)
-    @AppStorage("pokemonNames") var pokemonNames = Array(repeating: "", count: 905 + 1)
+    @AppStorage("favorites") var favorites = Array(repeating: false, count: 915 + 1)
+    @AppStorage("pokemonNames") var pokemonNames = Array(repeating: "", count: 915 + 1)
 
     
     var body: some View {

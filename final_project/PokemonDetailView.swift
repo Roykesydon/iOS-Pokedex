@@ -78,7 +78,7 @@ struct PokemonDetailView: View {
                             ZStack {
                                 ForEach(Array(fetcher.items[0].types.reversed() .enumerated()), id: \.element.slot) { index, item in
                                     if fetcher.items[0].types.count == 1{
-                                        Liquid()
+                                        Liquid(samples: 20, period: 6)
                                             .frame(width: 350, height: 350)
                                             .foregroundColor(typeColor[item.type.name])
                                             .opacity(0.3)
@@ -90,14 +90,14 @@ struct PokemonDetailView: View {
                                     }
                                     else if fetcher.items[0].types.count > 1{
                                         let colorBack = index==0 ? typeColor[item.type.name] : Color(red: 0, green: 0, blue: 0, opacity: 0)
-                                        Liquid()
+                                        Liquid(samples: 8, period: 3)
                                             .frame(width: 350, height: 350)
                                             .foregroundColor(colorBack)
                                             .opacity(0.3)
                                         
                                         let colorFront = index==1 ? typeColor[item.type.name] : Color(red: 0, green: 0, blue: 0, opacity: 0)
                                         
-                                        Liquid()
+                                        Liquid(samples: 8, period: 3)
                                             .frame(width: 320, height: 320)
                                             .foregroundColor(colorFront)
                                             .opacity(0.9)

@@ -16,6 +16,7 @@ struct final_projectApp: App {
 //            ContentView()
 //                .environmentObject(fetcher)
             LoginView()
+                .environment(\.colorScheme, .light)
         }
     }
 }

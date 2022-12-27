@@ -79,7 +79,7 @@ func changeOffset(next:Bool, offset: Int)->Int{
     let limit = 4
     var result = offset + ((next) ? limit : -limit)
     result = max(0, result)
-    result = min((905-1)/limit*limit, result)
+    result = min((904-1)/limit*limit, result)
     
     return result
 }
@@ -90,6 +90,7 @@ struct PokemonListView: View {
     
     @State var offset = 0
     @State var searchText = ""
+    @State private var pageNumber: Int = 1
     
     @Binding var favorites: [Bool]
     @Binding var pokemonNames: [String]
@@ -158,7 +159,6 @@ struct PokemonListView: View {
                                                     .font(.system(size: 20, weight: .heavy, design: .rounded))
                                                     .foregroundColor(.red)
                                                 Spacer()
-                                                
                                                 if favorites[offset+index+1] == false{
                                                     Image(systemName: "heart")
                                                         .foregroundColor(.red)
@@ -198,6 +198,7 @@ struct PokemonListView: View {
                         HStack(spacing: 50){
                             Button {
                                 offset = changeOffset(next: false, offset: offset)
+                                pageNumber = offset/4+1
                                 fetcher.fetchData(offset: offset)
                             } label: {
                                 Image(systemName: "chevron.left")
@@ -208,8 +209,19 @@ struct PokemonListView: View {
                             //                                    .frame(width: 30, height: 30)
                             //                            }
                             
+                            Picker("pageNumber", selection: $pageNumber) {
+                                ForEach(1...904/4, id: \.self) { number in
+                                    Text("\(number)")
+                                }
+                            }.onChange(of: pageNumber) { newValue in
+                                offset = 4*(pageNumber - 1)
+                            }
+                            
                             Button {
+                                print(offset)
                                 offset = changeOffset(next: true, offset: offset)
+                                print(offset)
+                                pageNumber = offset/4+1
                                 fetcher.fetchData(offset: offset)
                             } label: {
                                 Image(systemName: "chevron.right")
@@ -244,8 +256,8 @@ struct PokemonListView: View {
 }
 
 struct PokemonListView_Previews: PreviewProvider {
-    @State static var favorites = Array(repeating: false, count: 905 + 1)
-    @State static var pokemonNames = Array(repeating: "", count: 905 + 1)
+    @State static var favorites = Array(repeating: false, count: 904 + 1)
+    @State static var pokemonNames = Array(repeating: "", count: 904 + 1)
     
     static var previews: some View {
         PokemonListView(favorites: $favorites, pokemonNames: $pokemonNames)
